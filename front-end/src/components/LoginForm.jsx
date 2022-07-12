@@ -1,4 +1,3 @@
-import React from 'react';
 
 function LoginForm() {
   const handleSubmit = (event) => {

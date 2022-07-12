@@ -1,18 +1,18 @@
+import Link from 'next/link';
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 function Navbar() {
   return (
     <nav>
       <ul>
         <li>
-          <a href='/'>Register</a>
+          <Link href='/'>Register</Link>
         </li>
         <li>
-          <a href='/login'>Login</a>
+          <Link href='/login'>Login</Link>
         </li>
         <li>
-          <a href='/users'>Users</a>
+          <Link href='/users'>Users</Link>
         </li>
       </ul>
     </nav>
