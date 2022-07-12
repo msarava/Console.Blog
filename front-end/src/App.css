@@ -1,0 +1,15 @@
+.formBox {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: rgba(255, 190, 116, 0.822);
+  border-radius: 1rem;
+  padding: 1rem;
+}
+
+.formContainer {
+  display: flex;
+  justify-content: center;
+}
