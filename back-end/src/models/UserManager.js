@@ -8,19 +8,3 @@ const Userschema = new mongoose.Schema({
 
 module.exports= mongoose.model('User', Userschema);
 
-// class UserManager {
-//   static async register(userDatas) {
-//     const registeredUser = await UserModel.save(userDatas);
-//     return registeredUser;
-//   }
-
-//   login() {
-//     return;
-//   }
-
-//   getUsers() {
-//     return;
-//   }
-// }
-
-// module.exports = UserManager;
