@@ -1,54 +1,96 @@
-const UserManager = require('../models/UserManager');
+const { UserModel } = require('../models/UserManager');
 const jwt = require('jsonwebtoken');
 const argon2 = require('argon2');
 
 class UserController {
   static register = async (req, res) => {
-    const { email, password: clearpassword } = req.body;
-    const password = await argon2.hash(clearpassword);
-    const user = new UserManager({ email, password });
+    const { lastname, firstname, email, password: clearpassword } = req.body;
+    const role = 'user';
 
-    //TODO vérifier si mail et mpd renseignés + mail non utilisés
+    if (!email || !clearpassword) {
+      res.status(400).send({ error: 'E-mail et Mot de passe obligatoires' });
+      return;
+    }
+
+    const password = await argon2.hash(clearpassword);
+    const user = new UserModel({
+      lastname,
+      firstname,
+      email,
+      password,
+      role,
+    });
 
     try {
       const result = await user.save();
       res.status(200).send(result);
     } catch (error) {
-      console.error(error);
+      console.error(error.message);
       res.sendStatus(500);
     }
   };
-
-  static login = (req, res) => {
+  static login = async (req, res) => {
     const { email, password } = req.body;
     if (!email || !password) {
       res.status(400).send('Please specify both email and password');
-    } else {
-      // trouver le user via son mail : si pas de mail => erreur
-      // Récupérer les info de user puis vérification argon2 : si mdp KO => erreur
-      // Création du token
-      // const token = jwt.sign(
-      //   {
-      //     id: id,
-      //     role: role,
-      //   },
-      //   process.env.JWT_AUTH_SECRET,
-      //   { expiresIn: '1h' }
-      // );
-      // Envoi via cookies
-      // res
-      // .cookie('access_token', token, {
-      //   httpOnly: true,
-      //   secure: process.env.NODE_ENV === 'production',
-      // })
-      // .status(200)
-      // .json({ id, email, role });
+      return;
+    }
+    try {
+      const registeredUser = await UserModel.find({ email: email });
+      if (registeredUser.length === 0) {
+        res.status(403).send('Invalid credentials');
+      } else {
+        const { id, password: hash, role } = registeredUser[0];
+        if (await argon2.verify(hash, password)) {
+          const token = jwt.sign(
+            {
+              id: id,
+              role: role,
+            },
+            process.env.JWT_AUTH_SECRET,
+            { expiresIn: '1h' }
+          );
+          res
+            .cookie('access_token', token, {
+              httpOnly: true,
+              secure: process.env.NODE_ENV === 'production',
+            })
+            .status(200)
+            .json({ id, email, role });
+        } else {
+          res.status(403).send('Invalid credentials');
+        }
+      }
+    } catch (error) {
+      console.error('error', error.message);
+      res.sendStatus(500);
     }
   };
-  static authorization = (req, res) => {
-    const { email, password } = req.body;
+  static authorization = (req, res, next) => {
+    const token = req.cookies.access_token;
+    if (!token) {
+      return res.sendStatus(401);
+    }
+    try {
+      const { id, role } = jwt.verify(token, process.env.JWT_AUTH_SECRET);
+      req.userId = id;
+      req.userRole = role;
+      return next();
+    } catch {
+      return res.sendStatus(403);
+    }
   };
-  static getUsers = (req, res) => {
+  static isAdmin = (req, res, next) => {
+    if (req.userRole === 'Admin') {
+      return next();
+    }
+    return res.sendStatus(403);
+  };
+  static logout = (req, res) => {
+    return res.clearCookie('access_token').sendStatus(200);
+  };
+
+  static browse = (req, res) => {
     const { data } = req.body;
   };
 }

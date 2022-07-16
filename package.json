@@ -4,12 +4,14 @@
   "description": "tech test",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently \"npm --prefix ./front-end  run dev\" \"npm --prefix ./back-end run dev\""
   },
   "author": "",
   "license": "ISC",
   "keywords": [],
   "dependencies": {
+    "concurrently": "^7.2.2",
     "i": "^0.3.7",
     "npm": "^8.13.0"
   },
