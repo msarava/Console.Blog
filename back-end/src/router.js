@@ -14,11 +14,16 @@ router.get(
 router.get(
   '/admin/posts',
   UserController.authorization,
-   UserController.isAdmin,
+  UserController.isAdmin,
   PostController.browse
 );
-router.post('/posts', UserController.authorization, PostController.create);
+router.post(
+  '/posts',
+  UserController.authorization,
+  UserController.isAdmin,
+  PostController.create
+);
 
-// router.get('/users', UserController.authorization, UserController.getUsers);posts
+// router.get('/posts', UserController.authorization, UserController.getUsers);posts
 
 module.exports = router;

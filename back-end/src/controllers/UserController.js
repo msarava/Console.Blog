@@ -11,7 +11,11 @@ class UserController {
       res.status(400).send({ error: 'E-mail et Mot de passe obligatoires' });
       return;
     }
-
+    const registeredUser = await UserModel.find({ email: email });
+    if (registeredUser.length !== 0) {
+      res.status(403).send('Email already exists');
+      return;
+    }
     const password = await argon2.hash(clearpassword);
     const user = new UserModel({
       lastname,
