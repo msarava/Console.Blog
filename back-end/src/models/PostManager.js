@@ -6,6 +6,10 @@ const PostSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Please provide a title!'],
   },
+  content: {
+    type: String,
+    required: [true, 'Please provide a content!'],
+  },
   createdAt: {
     type: Date,
     immutable: true,
@@ -19,7 +23,12 @@ const PostSchema = new mongoose.Schema({
   picture: {
     type: String,
   },
-  Author: UserSchema,
+  author: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+  },
 });
 
-module.exports = mongoose.model('Post', PostSchema);
+const PostModel = mongoose.model('post', PostSchema);
+
+module.exports = { PostModel };

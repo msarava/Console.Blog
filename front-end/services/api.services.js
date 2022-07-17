@@ -17,8 +17,6 @@ export function registerApi(userDatas) {
 export async function loginApi(userLog) {
   const { email, password } = userLog;
   const url = 'users/login';
-  const results = await Api.post(url, { email, password }).then((response) =>
-    console.log(response)
-  );
+  const results = await Api.post(url, { email, password });
   return results;
 }

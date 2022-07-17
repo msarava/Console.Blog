@@ -15,8 +15,9 @@ function Navbar() {
           <Link href='/signup'>Inscription</Link>
         </li>
         <li>
-          <Link href='/login'>Login</Link>
+          <Link href='/login'>Connexion</Link>
         </li>
+              
       </ul>
     </nav>
   );

@@ -81,17 +81,15 @@ class UserController {
     }
   };
   static isAdmin = (req, res, next) => {
-    if (req.userRole === 'Admin') {
+    const token = req.cookies.access_token;
+    const { role } = jwt.verify(token, process.env.JWT_AUTH_SECRET);
+    if (role === 'admin') {
       return next();
     }
     return res.sendStatus(403);
   };
   static logout = (req, res) => {
-    return res.clearCookie('access_token').sendStatus(200);
-  };
-
-  static browse = (req, res) => {
-    const { data } = req.body;
+    return res.clearCookie('access_token').status(200).send('logged out');
   };
 }
 
