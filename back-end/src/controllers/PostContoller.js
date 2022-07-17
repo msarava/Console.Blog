@@ -7,7 +7,6 @@ class PostController {
     const token = req.cookies.access_token;
     const { id : author } = jwt.verify(token, process.env.JWT_AUTH_SECRET);
     const { title, content } = req.body;
-    console.log(author)
     const newPost = new PostModel({
       title,
       content,

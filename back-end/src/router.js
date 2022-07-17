@@ -1,5 +1,6 @@
 const UserController = require('./controllers/UserController');
 const PostController = require('./controllers/PostContoller');
+const CommentController = require('./controllers/CommentContoller');
 
 const express = require('express');
 const router = express.Router();
@@ -24,6 +25,10 @@ router.post(
   PostController.create
 );
 
-// router.get('/posts', UserController.authorization, UserController.getUsers);posts
+router.post(
+  '/posts/comment',
+  UserController.authorization,
+  CommentController.create
+);
 
 module.exports = router;

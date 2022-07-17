@@ -22,7 +22,10 @@ const UserSchema = new mongoose.Schema({
     required: [true, 'Please provide a password!'],
     unique: false,
   },
-  role: String,
+  role: {
+    type: String,
+    default: 'user',
+  },
   picture: {
     type: String,
     required: false,
@@ -32,6 +35,4 @@ const UserSchema = new mongoose.Schema({
 
 const UserModel = mongoose.model('User', UserSchema);
 
-
-
-module.exports = {UserModel, UserSchema};
+module.exports = { UserModel, UserSchema };

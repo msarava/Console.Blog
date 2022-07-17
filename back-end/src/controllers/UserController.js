@@ -5,10 +5,9 @@ const argon2 = require('argon2');
 class UserController {
   static register = async (req, res) => {
     const { lastname, firstname, email, password: clearpassword } = req.body;
-    const role = 'user';
 
     if (!email || !clearpassword) {
-      res.status(400).send({ error: 'E-mail et Mot de passe obligatoires' });
+      res.status(400).send({ error: 'Please specify both email and password' });
       return;
     }
     const registeredUser = await UserModel.find({ email: email });
@@ -93,7 +92,10 @@ class UserController {
     return res.sendStatus(403);
   };
   static logout = (req, res) => {
-    return res.clearCookie('access_token').status(200).send('logged out');
+    return res
+      .clearCookie('access_token')
+      .status(200)
+      .send('Successfully logged out');
   };
 }
 

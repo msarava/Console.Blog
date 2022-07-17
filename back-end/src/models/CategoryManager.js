@@ -7,5 +7,5 @@ const CategorySchema = new mongoose.Schema({
     unique: [true, 'Category Exist'],
   },
 });
-
-module.exports = mongoose.model('Category', CategorySchema);
+const CategoryModel = mongoose.model('Category', CategorySchema)
+module.exports = CategoryModel;

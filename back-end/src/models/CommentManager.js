@@ -16,6 +16,14 @@ const CommentSchema = new mongoose.Schema({
     type: Date,
     default: () => Date.now(),
   },
+  author: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+  },
+  parentPost :{
+    type :mongoose.Schema.Types.ObjectId,
+    ref :'Post'
+  }
 });
-
-module.exports = mongoose.model('Comment', CommentSchema);
+const CommentModel =  mongoose.model('Comment', CommentSchema);
+module.exports = CommentModel;
