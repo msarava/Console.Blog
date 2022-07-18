@@ -27,6 +27,11 @@ const PostSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
   },
+  category: {
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: 'Category',
+    required: [true, 'Please provide a category!'],
+  },
 });
 
 const PostModel = mongoose.model('Post', PostSchema);

@@ -6,6 +6,10 @@ const CategorySchema = new mongoose.Schema({
     required: [true, 'Please provide a name!'],
     unique: [true, 'Category Exist'],
   },
+  posts :{
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: 'Post',
+  }
 });
 const CategoryModel = mongoose.model('Category', CategorySchema)
 module.exports = CategoryModel;

@@ -1,17 +1,14 @@
 const UserController = require('./controllers/UserController');
 const PostController = require('./controllers/PostContoller');
 const CommentController = require('./controllers/CommentContoller');
+const CategoryController = require('./controllers/CategoryContoller');
 
 const express = require('express');
 const router = express.Router();
 
 router.post('/user/register', UserController.register);
 router.post('/user/login', UserController.login);
-router.get(
-  '/user/logout',
-  UserController.authorization,
-  UserController.logout
-);
+router.get('/user/logout', UserController.authorization, UserController.logout);
 
 //CRUD Posts
 router.post(
@@ -27,14 +24,14 @@ router.put(
   '/post/:postId',
   UserController.authorization,
   UserController.isAdmin,
-  PostController.update //TODO
+  PostController.update
 );
 
 router.delete(
   '/post/:postId',
   UserController.authorization,
   UserController.isAdmin,
-  PostController.delete //TODO
+  PostController.delete
 );
 
 //CRUD Commentaires
@@ -65,4 +62,27 @@ router.delete(
   CommentController.delete //TODO
 );
 
+//CRUD Categories
+router.post(
+  '/category',
+  UserController.authorization,
+  UserController.isAdmin,
+  CategoryController.create
+);
+
+router.get('/category/:categoryId?', CategoryController.browse);
+
+router.put(
+  '/category/:categoryId',
+  UserController.authorization,
+  UserController.isAdmin,
+  CategoryController.update
+);
+
+router.delete(
+  '/category/:categoryId',
+  UserController.authorization,
+  UserController.isAdmin,
+  CategoryController.delete
+);
 module.exports = router;
