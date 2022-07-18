@@ -5,30 +5,64 @@ const CommentController = require('./controllers/CommentContoller');
 const express = require('express');
 const router = express.Router();
 
-router.post('/users/register', UserController.register);
-router.post('/users/login', UserController.login);
+router.post('/user/register', UserController.register);
+router.post('/user/login', UserController.login);
 router.get(
-  '/users/logout',
+  '/user/logout',
   UserController.authorization,
   UserController.logout
 );
-router.get(
-  '/admin/posts',
-  UserController.authorization,
-  UserController.isAdmin,
-  PostController.browse
-);
+
+//CRUD Posts
 router.post(
-  '/posts',
+  '/post',
   UserController.authorization,
   UserController.isAdmin,
   PostController.create
 );
 
+router.get('/post/:postId?', PostController.browse);
+
+router.put(
+  '/post/:postId',
+  UserController.authorization,
+  UserController.isAdmin,
+  PostController.update //TODO
+);
+
+router.delete(
+  '/post/:postId',
+  UserController.authorization,
+  UserController.isAdmin,
+  PostController.delete //TODO
+);
+
+//CRUD Commentaires
 router.post(
-  '/posts/comment',
+  '/comment/:postId',
   UserController.authorization,
   CommentController.create
+);
+router.get(
+  '/comment/post/:postId?',
+  UserController.authorization,
+  CommentController.browse
+);
+router.get(
+  '/comment/:commentId',
+  UserController.authorization,
+  CommentController.getOne
+);
+router.put(
+  '/comment/:commentId',
+  UserController.authorization,
+  CommentController.update //TODO
+);
+
+router.delete(
+  '/comment/:commentId',
+  UserController.authorization,
+  CommentController.delete //TODO
 );
 
 module.exports = router;

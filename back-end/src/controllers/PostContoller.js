@@ -1,16 +1,14 @@
 const { PostModel } = require('../models/PostManager');
 const jwt = require('jsonwebtoken');
 
-
 class PostController {
   static create = async (req, res) => {
-    const token = req.cookies.access_token;
-    const { id : author } = jwt.verify(token, process.env.JWT_AUTH_SECRET);
+    const author = req.userId;
     const { title, content } = req.body;
     const newPost = new PostModel({
       title,
       content,
-      author
+      author,
     });
 
     try {
@@ -22,9 +20,40 @@ class PostController {
     }
   };
   static browse = async (req, res) => {
+    const { postId } = req.params;
+    console.log(postId);
     try {
-      const posts = await PostModel.find();
+      const posts = await PostModel.find(postId ? { _id: postId } : {});
       res.status(200).send(posts);
+    } catch (error) {
+      console.error(error.message);
+      res.sendStatus(500);
+    }
+  };
+
+  static update = async (req, res) => {
+    //TODO
+    const { postId } = req.params;
+    const updatedPost = req.body;
+    try {
+      const posts = await PostModel.updateOne({ _id: postId }, updatedPost);
+      res.status(204);
+    } catch (error) {
+      console.error(error.message);
+      res.sendStatus(500);
+    }
+  };
+  static delete = async (req, res) => {
+    const postId = req.params;
+    try {
+      const posts = await PostModel.deleteOne({ _id: postId });
+      if (result.deletedCount) {
+        response.sendStatus(204);
+      } else {
+        response
+          .status(404)
+          .json({ message: `No todo found with id ${postId}` });
+      }
     } catch (error) {
       console.error(error.message);
       res.sendStatus(500);

@@ -3,9 +3,10 @@ const jwt = require('jsonwebtoken');
 
 class CommentController {
   static create = async (req, res) => {
-    const token = req.cookies.access_token;
-    const { id: author } = jwt.verify(token, process.env.JWT_AUTH_SECRET);
-    const { content, parentPost } = req.body;
+    const author = req.userId;
+    const { content } = req.body;
+    const { postId: parentPost } = req.params;
+    console.log(parentPost);
     const newComment = new CommentModel({
       content,
       author,
@@ -21,10 +22,47 @@ class CommentController {
     }
   };
   static browse = async (req, res) => {
+    const { postId } = req.params;
     try {
-      const comments = await CommentModel.find();
+      const comments = await CommentModel.find(
+        postId ? { parentPost: postId } : {}
+      );
+      res.status(200).send(comments);
+    } catch (error) {
+      console.error(error.message);
+      res.sendStatus(500);
+    }
+  };
+  static getOne = async (req, res) => {
+    const { commentId } = req.params;
+    try {
+      const comments = await CommentModel.findById(commentId);
+      res.status(200).send(comments);
+    } catch (error) {
+      console.error(error.message);
+      res.sendStatus(500);
+    }
+  };
 
-      //TODO filter les comment d'un post particulier
+  static update = async (req, res) => {
+    const { commentId } = req.params;
+    const updatedComment = req.body;
+
+    try {
+      const comments = await CommentModel.updateOne(
+        { _id: commentId },
+        updatedComment
+      );
+      res.status(200).send(comments);
+    } catch (error) {
+      console.error(error.message);
+      res.sendStatus(500);
+    }
+  };
+  static delete = async (req, res) => {
+    const { commentId } = req.params;
+    try {
+      const comments = await CommentModel.deleteOne({ _id: commentId });
       res.status(200).send(comments);
     } catch (error) {
       console.error(error.message);

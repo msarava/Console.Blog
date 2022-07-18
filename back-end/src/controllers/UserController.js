@@ -84,8 +84,7 @@ class UserController {
     }
   };
   static isAdmin = (req, res, next) => {
-    const token = req.cookies.access_token;
-    const { role } = jwt.verify(token, process.env.JWT_AUTH_SECRET);
+    const role = req.userRole;
     if (role === 'admin') {
       return next();
     }
