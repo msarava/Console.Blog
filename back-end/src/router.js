@@ -18,7 +18,8 @@ router.post(
   PostController.create
 );
 
-router.get('/post/:postId?', PostController.browse);
+router.get('/post', PostController.getAllPosts);
+router.get('/post/:postId', PostController.getOnePost);
 
 router.put(
   '/post/:postId',

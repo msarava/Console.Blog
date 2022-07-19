@@ -32,7 +32,7 @@ function signup() {
           picture: '',
         });
         setTimeout(() => {
-          router.push('/');
+          router.push('/login');
         }, 1500);
       })
       .catch((e) => toast.error(e.message));

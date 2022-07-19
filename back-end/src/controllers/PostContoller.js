@@ -5,12 +5,13 @@ const CategoryModel = require('../models/CategoryManager');
 class PostController {
   static create = async (req, res) => {
     const author = req.userId;
-    const { title, content, category } = req.body;
+    const { title, content, category, picture } = req.body;
     const newPost = new PostModel({
       title,
       content,
       author,
       category,
+      picture,
     });
 
     try {
@@ -27,17 +28,25 @@ class PostController {
       res.sendStatus(500);
     }
   };
-  static browse = async (req, res) => {
-    const { postId } = req.params;
+  static getAllPosts = async (req, res) => {
     try {
-      const posts = await PostModel.find(postId ? { _id: postId } : {});
+      const posts = await PostModel.find();
       res.status(200).send(posts);
     } catch (error) {
       console.error(error.message);
       res.sendStatus(500);
     }
   };
-
+  static getOnePost = async (req, res) => {
+    const { postId } = req.params;
+    try {
+      const post = await PostModel.find({ _id: postId });
+      res.status(200).send(post);
+    } catch (error) {
+      console.error(error.message);
+      res.sendStatus(500);
+    }
+  };
   static update = async (req, res) => {
     const { postId } = req.params;
     const updatedPost = req.body;

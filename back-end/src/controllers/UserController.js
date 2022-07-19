@@ -5,7 +5,6 @@ const argon2 = require('argon2');
 class UserController {
   static register = async (req, res) => {
     const { lastname, firstname, email, password: clearpassword } = req.body;
-
     if (!email || !clearpassword) {
       res.status(400).send({ error: 'Please specify both email and password' });
       return;
@@ -21,7 +20,6 @@ class UserController {
       firstname,
       email,
       password,
-      role,
     });
 
     try {
