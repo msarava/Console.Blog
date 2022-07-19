@@ -41,7 +41,14 @@ class UserController {
       if (registeredUser.length === 0) {
         res.status(403).send('Invalid credentials');
       } else {
-        const { id, password: hash, role } = registeredUser[0];
+        const {
+          id,
+          password: hash,
+          role,
+          picture,
+          firstname,
+          lastname,
+        } = registeredUser[0];
         if (await argon2.verify(hash, password)) {
           const token = jwt.sign(
             {
@@ -57,7 +64,7 @@ class UserController {
               secure: process.env.NODE_ENV === 'production',
             })
             .status(200)
-            .json({ id, email, role });
+            .json({ id, email, role, picture, firstname, lastname });
         } else {
           res.status(403).send('Invalid credentials');
         }

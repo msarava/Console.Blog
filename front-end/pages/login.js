@@ -1,11 +1,13 @@
 import form from '@/styles/Form.module.css';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { loginApi } from 'services/api.services';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 import { useRouter } from 'next/router';
+import AuthContext from 'services/auth.service';
 
 function Login() {
+  const { user, setUser } = useContext(AuthContext);
   const router = useRouter();
   const [userLog, SetUserLog] = useState({
     email: '',
@@ -18,7 +20,8 @@ function Login() {
   const handleSubmit = (event) => {
     event.preventDefault();
     loginApi(userLog)
-      .then(() => {
+      .then((res) => {
+        setUser(res);
         toast.success('Vous êtes connecté');
         setTimeout(() => {
           router.push('/');
