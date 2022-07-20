@@ -10,10 +10,12 @@
   padding: 1rem;
 }
 .title {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
+  text-align: center;
 }
 .date {
   color: grey;
+  text-align: end;
 }
 .user {
   display: flex;
@@ -42,7 +44,7 @@
   align-items: center;
   gap: 1rem;
   border-top: solid 2px #fb6565;
-  padding: 1rem;
+  padding: 0.8rem;
 }
 .titleThird {
   color: #fb6565;
@@ -52,4 +54,11 @@
 .commentCount2 {
   font-size: 1rem;
   font-weight: 300;
+}
+.SignButton {
+  width: 250px;
+}
+.btnContainer {
+  display: flex;
+  justify-content: center;
 }

@@ -33,7 +33,7 @@ export default function index({ onePost }) {
           <Chip
             key={el._id}
             label={el.name}
-            sx={{ color: 'red' }}
+            // sx={{ color: 'red' }}
             onClick={handleClick}
           />
         ))}
@@ -63,7 +63,7 @@ export default function index({ onePost }) {
         <h2 className={styles.titleThird}>_Laisse un com' !</h2>
         <p className={styles.commentCount2}>{commentsCount} commentaire(s)</p>
       </div>
-      <SignInButton/>
+      <div className={styles.btnContainer}><SignInButton/></div>
       {onePost.comment.map(comment => <Comment key={comment.id} comment={comment}/>
         
         )}
