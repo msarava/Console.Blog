@@ -1,0 +1,18 @@
+.cointainer {
+  border: solid 2px #fb6565;
+  padding: 1rem;
+  margin-top: 1.5rem;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.date {
+  color: grey;
+  font-size: 0.85rem;
+  font-style: italic;
+}
+.content {
+  font-size: 1rem;
+}

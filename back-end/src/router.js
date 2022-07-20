@@ -41,11 +41,7 @@ router.post(
   UserController.authorization,
   CommentController.create
 );
-router.get(
-  '/comment/post/:postId?',
-  UserController.authorization,
-  CommentController.browse
-);
+router.get('/comment/post/:postId?', CommentController.browse);
 router.get(
   '/comment/:commentId',
   UserController.authorization,

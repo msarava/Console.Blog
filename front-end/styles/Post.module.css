@@ -1,0 +1,55 @@
+.postPicture {
+  width: 95vw;
+  /* display: block; */
+  /* margin-left: auto;
+  margin-right: auto; */
+  border-radius: 0.5rem;
+}
+
+.container {
+  padding: 1rem;
+}
+.title {
+  font-size: 1.4rem;
+}
+.date {
+  color: grey;
+}
+.user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: bold;
+  gap: 0.5rem;
+}
+.comment {
+  color: grey;
+  font-style: italic;
+  text-align: center;
+}
+.content {
+  margin-top: 1rem;
+}
+.titleSecond {
+  font-size: 1.2rem;
+  font-weight: bold;
+  font-style: italic;
+  text-align: center;
+}
+.share {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  border-top: solid 2px #fb6565;
+  padding: 1rem;
+}
+.titleThird {
+  color: #fb6565;
+  font-style: italic;
+  font-size: 1.4rem;
+}
+.commentCount2 {
+  font-size: 1rem;
+  font-weight: 300;
+}

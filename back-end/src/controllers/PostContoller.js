@@ -30,7 +30,10 @@ class PostController {
   };
   static getAllPosts = async (req, res) => {
     try {
-      const posts = await PostModel.find();
+      const posts = await PostModel.find()
+        .populate('author')
+        .populate('category')
+        .populate('comment');
       res.status(200).send(posts);
     } catch (error) {
       console.error(error.message);
@@ -40,7 +43,11 @@ class PostController {
   static getOnePost = async (req, res) => {
     const { postId } = req.params;
     try {
-      const post = await PostModel.find({ _id: postId });
+      const post = await PostModel.find({ _id: postId })
+        .populate('author')
+        .populate('category')
+        .populate('comment');
+
       res.status(200).send(post);
     } catch (error) {
       console.error(error.message);

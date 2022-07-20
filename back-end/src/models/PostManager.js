@@ -32,6 +32,12 @@ const PostSchema = new mongoose.Schema({
     ref: 'Category',
     required: [true, 'Please provide a category!'],
   },
+  comment: {
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: 'Comment',
+    required: [true, 'Please provide a category!'],
+
+  },
 });
 
 const PostModel = mongoose.model('Post', PostSchema);

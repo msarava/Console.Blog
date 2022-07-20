@@ -1,20 +1,29 @@
 const CommentModel = require('../models/CommentManager');
 const jwt = require('jsonwebtoken');
+const { PostModel } = require('../models/PostManager');
 
 class CommentController {
   static create = async (req, res) => {
     const author = req.userId;
     const { content } = req.body;
-    const { postId: parentPost } = req.params;
-    console.log(parentPost);
+    const { postId: post } = req.params;
     const newComment = new CommentModel({
       content,
       author,
-      parentPost,
+      post,
     });
 
     try {
       const savedComment = await newComment.save();
+      const initialPost = await PostModel.findOne({ _id: post });
+      const oldCommentList = initialPost.comment;
+      const updatedPost = await PostModel.updateOne(
+        { _id: post },
+        {
+          comment: [...oldCommentList, savedComment._id],
+        }
+      );
+
       res.status(200).send(savedComment);
     } catch (error) {
       console.error(error.message);
@@ -24,8 +33,8 @@ class CommentController {
   static browse = async (req, res) => {
     const { postId } = req.params;
     try {
-      const comments = await CommentModel.find(
-        postId ? { parentPost: postId } : {}
+      const comments = await CommentModel.find({ parentPost: postId }).populate(
+        'author'
       );
       res.status(200).send(comments);
     } catch (error) {
