@@ -16,3 +16,22 @@
 .content {
   font-size: 1rem;
 }
+
+.formHeader {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+.formContainer{
+  display: flex;
+  flex-direction: column;
+}
+.formBtn{
+  text-align: center;
+  margin-top: 0.5rem;
+}
+.userdetails{
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}

@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.post('/user/register', UserController.register);
 router.post('/user/login', UserController.login);
-router.get('/user/logout', UserController.authorization, UserController.logout);
+router.get('/user/logout', UserController.logout);
 
 //CRUD Posts
 router.post(

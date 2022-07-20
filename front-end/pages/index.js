@@ -2,10 +2,13 @@ import Head from 'next/head';
 import styles from '@/styles/Home.module.css';
 import { getPosts } from 'services/api.services';
 import CardComp from '@/components/post/Card';
+import { useContext } from 'react';
+import AuthContext from 'services/auth.service';
 
 export default function Home({ allPosts }) {
+  const { user } = useContext(AuthContext);
   return (
-    <div >
+    <div>
       <Head>
         <title>Console.Blog()</title>
         <meta name='description' content='Page d\accueil' />
@@ -27,10 +30,3 @@ export async function getStaticProps() {
     props: { allPosts },
   };
 }
-
-// export const getStaticPaths = async () => {
-//   return {
-//     paths: [],
-//     fallback: false,
-//   };
-// };

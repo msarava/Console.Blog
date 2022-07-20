@@ -3,26 +3,35 @@ import axios from 'axios';
 const Api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BACKEND_URL,
 });
-
+const config = {
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  withCredentials: true,
+};
 //Auth
 export function registerApi(userDatas) {
-  const { lastname, firstname, email, password } = userDatas;
+  const { lastname, firstname, email, password, picture } = userDatas;
   const url = 'user/register';
-  const results = Api.post(url, { lastname, firstname, email, password }).then(
-    (response) => response.data
-  );
+  const results = Api.post(url, {
+    lastname,
+    firstname,
+    email,
+    password,
+    picture,
+  }).then((response) => response.data);
   return results;
 }
 
 export async function loginApi(userLog) {
   const { email, password } = userLog;
   const url = 'user/login';
-  const results = await Api.post(url, { email, password });
+  const results = await Api.post(url, { email, password }, config);
   return results;
 }
 export async function logOutApi() {
   const url = 'user/logout';
-  const results = await Api.post(url);
+  const results = await Api.get(url);
   return results;
 }
 
@@ -42,35 +51,47 @@ export async function getOnePost(postId) {
 export async function createOnePostAPI(post) {
   const { title, content, category, picture } = post;
   const url = `post`;
-  const createdPost = await Api.post(url, {
-    title,
-    content,
-    category,
-    picture,
-  }).then((response) => response.data[0]);
+  const createdPost = await Api.post(
+    url,
+    {
+      title,
+      content,
+      category,
+      picture,
+    },
+    config
+  ).then((response) => response.data[0]);
   return createdPost;
 }
 
 export async function updateOnePostAPI(post) {
   const { title, content, category, picture } = post;
   const url = `post`;
-  const createdPost = await Api.put(url, {
-    title,
-    content,
-    category,
-    picture,
-  }).then((response) => response.data[0]);
+  const createdPost = await Api.put(
+    url,
+    {
+      title,
+      content,
+      category,
+      picture,
+    },
+    config
+  ).then((response) => response.data[0]);
   return createdPost;
 }
 export async function deleteOnePostAPI(post) {
   const { title, content, category, picture } = post;
   const url = `post`;
-  const deletedPost = await Api.put(url, {
-    title,
-    content,
-    category,
-    picture,
-  }).then((response) => response.data[0]);
+  const deletedPost = await Api.put(
+    url,
+    {
+      title,
+      content,
+      category,
+      picture,
+    },
+    config
+  ).then((response) => response.data[0]);
   return deletedPost;
 }
 
@@ -89,7 +110,7 @@ export async function getCommentByIdAPI(commentId) {
 export async function createCommentAPI(comment, postId) {
   const { content } = comment;
   const url = `comment/${postId}`;
-  const newComment = await Api.post(url, { content }).then(
+  const newComment = await Api.post(url, { content }, config).then(
     (response) => response.data
   );
   return newComment;

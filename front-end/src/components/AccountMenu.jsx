@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 import Menu from '@mui/material/Menu';
@@ -7,19 +7,29 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
-
 import Logout from '@mui/icons-material/Logout';
 import KeyboardIcon from '@mui/icons-material/Keyboard';
 import Link from 'next/link';
+import AuthContext from 'services/auth.service';
+import { useRouter } from 'next/router';
+import { logOutApi } from 'services/api.services';
 
 export default function AccountMenu() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const { user, setUser } = useContext(AuthContext);
+  console.log('context', user)
+  const router = useRouter();
+  const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleDelog = () => {
+    setUser(null);
+    logOutApi().then(router.push('/login'));
   };
   return (
     <React.Fragment>
@@ -73,23 +83,32 @@ export default function AccountMenu() {
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
         <MenuItem>
-          <Link href='/login'> _Connexion</Link>
-          {/* <Avatar /> User */}
+          {user ? (
+            <>
+              <Avatar src={user.picture} />
+              {user.firstname}
+            </>
+          ) : (
+            <Link href='/login'> _Connexion</Link>
+          )}
         </MenuItem>
         <Divider />
         <MenuItem>_Rechercher</MenuItem>
         <Divider />
 
         <MenuItem>
-          <p>Pas encore inscrit ?</p>
-          <p>Inscrivez-vous !</p>
-          {/*_Deconnexion*/}
-        </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <Logout fontSize='small' />
-          </ListItemIcon>
-          Logout
+          {user ? (
+            <span onClick={handleDelog}>
+              <ListItemIcon>
+                <Logout fontSize='small' />
+              </ListItemIcon>
+              _Deconnexion
+            </span>
+          ) : (
+            <>
+             <Link href='/signup'>_S'inscrire</Link>
+            </>
+          )}
         </MenuItem>
       </Menu>
     </React.Fragment>

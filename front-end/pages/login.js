@@ -1,13 +1,14 @@
 import form from '@/styles/Form.module.css';
 import { useContext, useState } from 'react';
 import { loginApi } from 'services/api.services';
-import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 import AuthContext from 'services/auth.service';
+import { Button } from '@mui/material';
+import CreateIcon from '@mui/icons-material/Create';
 
 function Login() {
-  const { user, setUser } = useContext(AuthContext);
+  const { setUser } = useContext(AuthContext);
   const router = useRouter();
   const [userLog, SetUserLog] = useState({
     email: '',
@@ -21,10 +22,11 @@ function Login() {
     event.preventDefault();
     loginApi(userLog)
       .then((res) => {
-        setUser(res);
+        console.log(res.data);
+        setUser(res.data);
         toast.success('Vous êtes connecté');
         setTimeout(() => {
-          router.push('/');
+          router.back();
         }, 1000);
       })
       .catch((e) => toast.error('E-mail ou mot de passe invalides'));
@@ -54,6 +56,16 @@ function Login() {
 
         <button type='submit'>Se connecter</button>
       </form>
+      <p>Pas encore inscrit ?</p>
+      <Button
+        component='a'
+        href='/signup'
+        variant='outlined'
+        startIcon={<CreateIcon />}
+      >
+        Inscrivez-vous
+      </Button>
+
       <ToastContainer
         position='bottom-right'
         autoClose={5000}

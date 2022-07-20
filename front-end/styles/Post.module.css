@@ -12,6 +12,7 @@
 .title {
   font-size: 1.6rem;
   text-align: center;
+  margin: 0;
 }
 .date {
   color: grey;
@@ -61,4 +62,32 @@
 .btnContainer {
   display: flex;
   justify-content: center;
+}
+.chips {
+  display: flex;
+  padding: 0.5rem;
+}
+.cardFooter {
+  padding: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+.authorInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.cardContent {
+  padding: 1rem;
+  margin: 0;
+  color: grey;
+}
+.authorName {
+  font-weight: bold;
+  margin: 0.5rem;
+}
+
+.cardDetails {
+  display: flex;
+  flex-direction: column;
 }

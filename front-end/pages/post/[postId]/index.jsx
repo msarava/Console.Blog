@@ -1,4 +1,8 @@
-import { getOnePost, getPosts } from 'services/api.services';
+import {
+  getCommentFromPostAPI,
+  getOnePost,
+  getPosts,
+} from 'services/api.services';
 import styles from '@/styles/Post.module.css';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
@@ -11,13 +15,20 @@ import EmailIcon from '@mui/icons-material/Email';
 import RssFeedIcon from '@mui/icons-material/RssFeed';
 import SignInButton from '@/components/post/SignInButton';
 import Comment from '@/components/post/Comment';
+import { useContext, useEffect, useState } from 'react';
+import AuthContext from 'services/auth.service';
+import CommentForm from '@/components/post/CommentForm';
 
-export default function index({ onePost }) {
+export default function index({ onePost, commentList }) {
+
+
+  const [comments, setComments] = useState(commentList);
+  const { user } = useContext(AuthContext);
   const handleClick = () => {
     console.info('TODO redirect list of post from this cat');
   };
-  console.log('front', onePost);
-  const commentsCount = onePost.comment.length;
+  const commentsCount = comments.length;
+
   const date = DateTime.fromISO(onePost.createdAt).toLocaleString(
     DateTime.DATETIME_MED
   );
@@ -33,7 +44,11 @@ export default function index({ onePost }) {
           <Chip
             key={el._id}
             label={el.name}
-            // sx={{ color: 'red' }}
+            sx={{
+              backgroundColor: '#fb6565',
+              color: '#ffffff',
+              fontWeight: 'bold',
+            }}
             onClick={handleClick}
           />
         ))}
@@ -63,20 +78,30 @@ export default function index({ onePost }) {
         <h2 className={styles.titleThird}>_Laisse un com' !</h2>
         <p className={styles.commentCount2}>{commentsCount} commentaire(s)</p>
       </div>
-      <div className={styles.btnContainer}><SignInButton/></div>
-      {onePost.comment.map(comment => <Comment key={comment.id} comment={comment}/>
-        
-        )}
+      {user ? (
+        <div>
+          <CommentForm user={user} postId={onePost._id} setComments={setComments} />
+        </div>
+      ) : (
+        <div className={styles.btnContainer}>
+          <SignInButton />
+        </div>
+      )}
+      {comments.map((comment) => (
+        <Comment key={comment._id} comment={comment} />
+      ))}
     </div>
   );
 }
 export async function getStaticProps({ params }) {
   const { postId } = params;
   const onePost = await getOnePost(postId);
+  const commentList = await getCommentFromPostAPI(postId);
 
   return {
     props: {
       onePost,
+      commentList,
     },
   };
 }
