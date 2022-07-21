@@ -20,10 +20,12 @@ const [isVisible, setIsVisible] = useState(post.visible)
   };
   return (
     <div className={card.cardContainer}>
-      <div>
-        <div className={card.date}>{date}</div>
-        <div className={card.title}>{post.title}</div>
-      </div>
+      <Link href={`/post/${post._id}`}>
+          <div>
+            <div className={card.date}>{date}</div>
+            <div className={card.title}>{post.title}</div>
+          </div>
+        </Link>
       <div className={card.icons}>
         <div>
           <Link href={`/admin/${post._id}/edit`}>

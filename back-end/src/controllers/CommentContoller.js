@@ -33,7 +33,7 @@ class CommentController {
   static browse = async (req, res) => {
     const { postId } = req.params;
     try {
-      const comments = await CommentModel.find({ parentPost: postId }).populate(
+      const comments = await CommentModel.find({ post: postId }).populate(
         'author'
       );
       res.status(200).send(comments);
