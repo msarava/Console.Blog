@@ -8,7 +8,6 @@ import { Button, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import { createOnePostAPI, getCategoryAPI } from 'services/api.services';
 
 function edit({ post, categories }) {
-  console.log('SSR', post);
   const [updatedPost, SetUpdatedPost] = useState({
     title: post.title,
     content: post.content,

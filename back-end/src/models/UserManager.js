@@ -3,34 +3,40 @@ const mongoose = require('mongoose');
 const UserSchema = new mongoose.Schema({
   lastname: {
     type: String,
-    required: false,
-    unique: false,
+    required: 'Lastname is required',
+
+    match: [/^[a-z ,.'-]+$/, 'Please fill a valid email address'],
   },
   firstname: {
     type: String,
-    required: false,
-    unique: false,
+    required: 'Firstname is required',
+
+    match: [/^[a-z ,.'-]+$/, 'Please fill a valid email address'],
   },
   email: {
     type: String,
+    trim: true,
     lowercase: true,
-    required: [true, 'Please provide an Email!'],
-    unique: [true, 'Email Exist'],
+    unique: true,
+    required: 'Email address is required',
+    match: [
+      /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+      'Please fill a valid email address',
+    ],
   },
   password: {
     type: String,
     required: [true, 'Please provide a password!'],
-    unique: false,
+    match: [
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+      'Please fill a valid password',
+    ],
   },
   role: {
     type: String,
     default: 'user',
   },
-  picture: {
-    type: String,
-    required: false,
-    unique: false,
-  },
+  picture: String,
 });
 
 const UserModel = mongoose.model('User', UserSchema);

@@ -4,7 +4,7 @@ import { loginApi } from 'services/api.services';
 import { ToastContainer, toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 import AuthContext from 'services/auth.service';
-import { Button } from '@mui/material';
+import { Button, TextField } from '@mui/material';
 import CreateIcon from '@mui/icons-material/Create';
 
 function Login() {
@@ -28,38 +28,51 @@ function Login() {
           router.back();
         }, 1000);
       })
-      .catch((e) => toast.error('E-mail ou mot de passe invalides'));
+      .catch((e) => toast.error('Identifiants invalides'));
   };
   return (
     <div className={form.container}>
+      <h1 className={form.title}>_Connexion</h1>
+
       <form className={form.box} onSubmit={handleSubmit}>
-        <label htmlFor='email'> E-mail</label>
-        <input
-          type='email'
+        <TextField
           name='email'
+          type='email'
+
+          label='Email'
           id='emailInput'
           placeholder='E-mail'
+          variant='standard'
           value={userLog.email}
           onChange={handleChange}
+          required
         />
-
-        <label htmlFor='password'>Mot de passe</label>
-        <input
-          type='password'
+        <TextField
           name='password'
+          type='password'
+          label='Mot de passe'
           id='passwordInput'
           placeholder='Mot de passe'
           value={userLog.password}
+          variant='standard'
           onChange={handleChange}
+          required
         />
-
-        <button type='submit'>Se connecter</button>
+        <Button
+          variant='contained'
+          type='submit'
+          sx={{ backgroundColor: '#fb6565' }}
+        >
+          Se connecter
+        </Button>
       </form>
       <p>Pas encore inscrit ?</p>
       <Button
         component='a'
         href='/signup'
-        variant='outlined'
+        variant='outline'
+        sx={{ color: '#fb6565' }}
+
         startIcon={<CreateIcon />}
       >
         Inscrivez-vous

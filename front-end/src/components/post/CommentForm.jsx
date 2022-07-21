@@ -5,9 +5,9 @@ import { useRouter } from 'next/router';
 import { createCommentAPI, getCommentFromPostAPI } from 'services/api.services';
 import { ToastContainer, toast } from 'react-toastify';
 
-function CommentForm({ postId, user, setComments}) {
-const router = useRouter()
- 
+function CommentForm({ postId, user, setComments }) {
+  const router = useRouter();
+
   const [newComment, setNewComment] = useState({ content: '' });
   const handleChange = (e) => {
     setNewComment({ content: e.target.value });
@@ -15,11 +15,10 @@ const router = useRouter()
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    createCommentAPI(newComment, postId);
+    await createCommentAPI(newComment, postId);
     setComments(await getCommentFromPostAPI(postId));
-    setNewComment({content :''});
+    setNewComment({ content: '' });
     toast.success('Votre commentaire a bien été publié');
-    
   };
   return (
     <div className={form.formContainer}>
@@ -47,7 +46,8 @@ const router = useRouter()
             Valider
           </Button>
         </div>
-      </form> <ToastContainer
+      </form>{' '}
+      <ToastContainer
         position='bottom-right'
         autoClose={2000}
         hideProgressBar={false}
@@ -58,7 +58,6 @@ const router = useRouter()
         draggable
         pauseOnHover
       />
-      
     </div>
   );
 }

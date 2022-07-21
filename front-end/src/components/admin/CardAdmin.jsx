@@ -41,7 +41,7 @@ const [isVisible, setIsVisible] = useState(post.visible)
               sx={{ backgroundColor: '#fb6565' }}
               onClick={switchVisible}
             >
-              <VisibilityOffIcon />
+              <VisibilityIcon />
             </IconButton>
           ) : (
             <IconButton
@@ -49,7 +49,7 @@ const [isVisible, setIsVisible] = useState(post.visible)
               sx={{ backgroundColor: '#808080' }}
               onClick={switchVisible}
             >
-              <VisibilityIcon />
+              <VisibilityOffIcon />
             </IconButton>
           )}
         </div>

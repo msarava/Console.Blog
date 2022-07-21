@@ -13,6 +13,11 @@ import Link from 'next/link';
 import AuthContext from 'services/auth.service';
 import { useRouter } from 'next/router';
 import { logOutApi } from 'services/api.services';
+import { Button } from '@mui/material';
+import SensorOccupiedIcon from '@mui/icons-material/SensorOccupied';
+import SearchIcon from '@mui/icons-material/Search';
+import LoginIcon from '@mui/icons-material/Login';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 
 export default function AccountMenu() {
   const { user, setUser } = useContext(AuthContext);
@@ -89,21 +94,39 @@ export default function AccountMenu() {
               {user.firstname}
             </>
           ) : (
-            <Link href='/login'> _Connexion</Link>
+            <>
+              <ListItemIcon>
+                <LoginIcon fontSize='small' />
+              </ListItemIcon>
+              <Link href='/login'>
+                <a>_Connexion</a>
+              </Link>
+            </>
           )}
         </MenuItem>
         <Divider />
         {user?.role === 'admin' ? (
           <MenuItem>
-            <Link href='/admin'>Admin</Link>{' '}
+            <ListItemIcon>
+              <AdminPanelSettingsIcon fontSize='small' />
+            </ListItemIcon>
+            <Link href='/admin'>
+              <a>Admin</a>
+            </Link>{' '}
           </MenuItem>
         ) : (
           ''
         )}
         {user?.role === 'admin' ? <Divider /> : ''}
-        <MenuItem>_Rechercher</MenuItem>
+        <MenuItem>
+          <ListItemIcon>
+            <SearchIcon fontSize='small' />
+          </ListItemIcon>
+          <Link href='/search'>
+            <a>_Rechercher</a>
+          </Link>
+        </MenuItem>
         <Divider />
-
         <MenuItem>
           {user ? (
             <span onClick={handleDelog}>
@@ -114,6 +137,9 @@ export default function AccountMenu() {
             </span>
           ) : (
             <>
+              <ListItemIcon>
+                <SensorOccupiedIcon fontSize='small' />
+              </ListItemIcon>
               <Link href='/signup'>_S'inscrire</Link>
             </>
           )}

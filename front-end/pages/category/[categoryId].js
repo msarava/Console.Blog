@@ -3,10 +3,9 @@ import post from '@/styles/Category.module.css';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import CategoryCard from '@/components/post/CategoryCard';
 
-
 export default function categoryId({ category }) {
   return (
-    <div>
+    <div className={post.generalContainer}>
       <h1 className={post.title}>
         <LocalOfferIcon color='action' />
         {category.name}
@@ -15,7 +14,9 @@ export default function categoryId({ category }) {
         {category.posts
           .filter((post) => post.visible === true)
           .map((post) => (
-            <CategoryCard post={post} />
+            
+              <CategoryCard key={post._id} post={post}/>
+        
           ))}
       </div>
     </div>

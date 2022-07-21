@@ -1,12 +1,12 @@
 import React from 'react';
 import { useState } from 'react';
-import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 import form from '@/styles/Form.module.css';
 import { registerApi } from 'services/api.services';
 import { useRouter } from 'next/router';
 import { Button, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import Image from 'next/image';
+import { CleaningServices } from '@mui/icons-material';
 
 function signup() {
   const [userData, SetUserData] = useState({
@@ -17,6 +17,7 @@ function signup() {
     picture: '',
   });
   const router = useRouter();
+
   const handleChange = (event) => {
     SetUserData({ ...userData, [event.target.name]: event.target.value });
   };
@@ -37,11 +38,15 @@ function signup() {
           router.push('/login');
         }, 1500);
       })
-      .catch((e) => toast.error(e.message));
+      .catch((e) => {
+        console.log(e)
+        toast.error(e)});
   };
+
+  const helper ='<ul><li>test</li></ul>'
   return (
     <div className={form.container}>
-      <h1 className={form.title}>_Incription</h1>
+      <h1 className={form.title}>_Inscription</h1>
       <form className={form.box} onSubmit={handleSubmit} method='post'>
         <TextField
           name='lastname'
@@ -51,6 +56,7 @@ function signup() {
           variant='standard'
           value={userData.lastname}
           onChange={handleChange}
+          required
         />
         <TextField
           name='firstname'
@@ -60,10 +66,12 @@ function signup() {
           variant='standard'
           value={userData.firstname}
           onChange={handleChange}
+          required
         />
 
         <TextField
           name='email'
+          type='email'
           label='Email'
           id='emailInput'
           placeholder='E-mail'
@@ -75,6 +83,7 @@ function signup() {
 
         <TextField
           name='password'
+          type='password'
           label='Mot de passe'
           id='passwordInput'
           placeholder='Password'
@@ -82,11 +91,13 @@ function signup() {
           variant='standard'
           onChange={handleChange}
           required
-          helperText='Min 8 caractères'
+          helperText='8 caractères min. et 1 majuscule, chiffre, car. spécial'
         />
 
         <div>
-          <InputLabel id='demo-simple-select-helper-label'>Selectionnez un image de profil</InputLabel>
+          <InputLabel id='demo-simple-select-helper-label'>
+            Selectionnez un image de profil
+          </InputLabel>
           <Select
             fullWidth
             name='picture'
