@@ -22,7 +22,6 @@ function Login() {
     event.preventDefault();
     loginApi(userLog)
       .then((res) => {
-        console.log(res.data);
         setUser(res.data);
         toast.success('Vous êtes connecté');
         setTimeout(() => {

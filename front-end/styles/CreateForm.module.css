@@ -1,0 +1,27 @@
+.container {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.box {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 85vw;
+}
+.title{
+  background-color: #fb6565;
+  color: white;
+  padding: 0.5rem 1rem;
+}
+.select{
+  display: block;
+  text-align: center;
+}
+.pic{
+  border-radius: 50%;
+}
+.btnContainer{
+  display: flex;
+justify-content: space-around;}

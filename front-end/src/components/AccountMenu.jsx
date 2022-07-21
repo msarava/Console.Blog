@@ -16,7 +16,7 @@ import { logOutApi } from 'services/api.services';
 
 export default function AccountMenu() {
   const { user, setUser } = useContext(AuthContext);
-  console.log('context', user)
+  console.log('context', user);
   const router = useRouter();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -93,6 +93,14 @@ export default function AccountMenu() {
           )}
         </MenuItem>
         <Divider />
+        {user?.role === 'admin' ? (
+          <MenuItem>
+            <Link href='/admin'>Admin</Link>{' '}
+          </MenuItem>
+        ) : (
+          ''
+        )}
+        {user?.role === 'admin' ? <Divider /> : ''}
         <MenuItem>_Rechercher</MenuItem>
         <Divider />
 
@@ -106,7 +114,7 @@ export default function AccountMenu() {
             </span>
           ) : (
             <>
-             <Link href='/signup'>_S'inscrire</Link>
+              <Link href='/signup'>_S'inscrire</Link>
             </>
           )}
         </MenuItem>

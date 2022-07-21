@@ -15,7 +15,6 @@ import { Chip, Stack } from '@mui/material';
 import styles from '@/styles/Post.module.css';
 
 export default function CardComp({ post }) {
-  console.log(post);
   const router = useRouter();
   const handleClickCard = () => {
     router.push(`/post/${post._id}`);

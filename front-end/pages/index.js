@@ -15,9 +15,11 @@ export default function Home({ allPosts }) {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <div className={styles.list}>
-        {allPosts.map((post) => (
-          <CardComp key={post._id} post={post} />
-        ))}
+        {allPosts
+          .filter((post) => post.visible === true)
+          .map((post) => (
+            <CardComp key={post._id} post={post} />
+          ))}
       </div>
     </div>
   );

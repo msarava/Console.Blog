@@ -36,7 +36,10 @@ const PostSchema = new mongoose.Schema({
     type: [mongoose.Schema.Types.ObjectId],
     ref: 'Comment',
     required: [true, 'Please provide a category!'],
-
+  },
+  visible: {
+    type: Boolean,
+    default: true,
   },
 });
 

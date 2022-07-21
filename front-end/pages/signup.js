@@ -18,7 +18,6 @@ function signup() {
   });
   const router = useRouter();
   const handleChange = (event) => {
-    console.log(event.target.value);
     SetUserData({ ...userData, [event.target.name]: event.target.value });
   };
 

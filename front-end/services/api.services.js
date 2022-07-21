@@ -64,9 +64,9 @@ export async function createOnePostAPI(post) {
   return createdPost;
 }
 
-export async function updateOnePostAPI(post) {
-  const { title, content, category, picture } = post;
-  const url = `post`;
+export async function updateOnePostAPI(post, postId) {
+  const { title, content, category, picture, visible } = post;
+  const url = `post/${postId}`;
   const createdPost = await Api.put(
     url,
     {
@@ -74,6 +74,7 @@ export async function updateOnePostAPI(post) {
       content,
       category,
       picture,
+      visible,
     },
     config
   ).then((response) => response.data[0]);
