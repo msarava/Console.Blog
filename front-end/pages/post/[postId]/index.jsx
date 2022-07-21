@@ -20,14 +20,13 @@ import AuthContext from 'services/auth.service';
 import CommentForm from '@/components/post/CommentForm';
 
 export default function index({ onePost, commentList }) {
-
-
   const [comments, setComments] = useState(commentList);
   const { user } = useContext(AuthContext);
   const handleClick = () => {
     console.info('TODO redirect list of post from this cat');
   };
   const commentsCount = comments.length;
+  const hasComment = commentsCount > 0;
 
   const date = DateTime.fromISO(onePost.createdAt).toLocaleString(
     DateTime.DATETIME_MED
@@ -60,8 +59,8 @@ export default function index({ onePost, commentList }) {
         {onePost.author.firstname}
       </div>
       <div className={styles.comment}>
-        {commentsCount && `${commentsCount} commentaire(s) `}
-        {commentsCount && <MessageIcon color='action' />}
+        {hasComment && `${commentsCount} commentaire(s) `}
+        {hasComment && <MessageIcon color='action' />}
       </div>
 
       <div className={styles.content}>{onePost.content}</div>
@@ -80,7 +79,11 @@ export default function index({ onePost, commentList }) {
       </div>
       {user ? (
         <div>
-          <CommentForm user={user} postId={onePost._id} setComments={setComments} />
+          <CommentForm
+            user={user}
+            postId={onePost._id}
+            setComments={setComments}
+          />
         </div>
       ) : (
         <div className={styles.btnContainer}>
