@@ -3,6 +3,9 @@ import { useContext, useState } from 'react';
 import AuthContext from 'services/auth.service';
 import '../styles/globals.css';
 import 'react-toastify/dist/ReactToastify.css';
+import '@/styles/breadcrumbs.css'
+
+
 
 
 function MyApp({ Component, pageProps }) {

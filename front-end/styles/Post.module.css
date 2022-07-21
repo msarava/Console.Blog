@@ -1,8 +1,5 @@
 .postPicture {
-  width: 95vw;
-  /* display: block; */
-  /* margin-left: auto;
-  margin-right: auto; */
+  width: 100%;
   border-radius: 0.5rem;
 }
 
@@ -90,4 +87,21 @@
 .cardDetails {
   display: flex;
   flex-direction: column;
+}
+.commentCount {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.commentCountNum {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  border-radius: 50%;
+  background-color: grey;
+  color: white;
+  width: 25px;
+  height: 25px;
 }

@@ -67,7 +67,9 @@ router.post(
   CategoryController.create
 );
 
-router.get('/category/:categoryId?', CategoryController.browse);
+router.get('/category', CategoryController.browse);
+router.get('/category/:categoryId', CategoryController.getOne);
+
 
 router.put(
   '/category/:categoryId',

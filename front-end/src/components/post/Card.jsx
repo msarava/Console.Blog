@@ -1,12 +1,9 @@
 import React from 'react';
 import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
+import MessageIcon from '@mui/icons-material/Message';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 import ShareIcon from '@mui/icons-material/Share';
 import { useRouter } from 'next/router';
@@ -15,6 +12,8 @@ import { Chip, Stack } from '@mui/material';
 import styles from '@/styles/Post.module.css';
 
 export default function CardComp({ post }) {
+  const commentsCount = post.comment.length;
+  const hasComment = commentsCount > 0;
   const router = useRouter();
   const handleClickCard = () => {
     router.push(`/post/${post._id}`);
@@ -26,13 +25,14 @@ export default function CardComp({ post }) {
     DateTime.DATETIME_MED
   );
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      <div onClick={handleClickCard}>
+    <Card sx={{ width: 345 }}>
+      <div>
         <CardMedia
           component='img'
           height='194'
           image={post.picture}
           alt='picture'
+          onClick={handleClickCard}
         />
         <div className={styles.chips}>
           {post.category.map((el) => (
@@ -48,9 +48,14 @@ export default function CardComp({ post }) {
             />
           ))}
         </div>
-        <h1 className={styles.title}>{`> ${post.title}`}</h1>
-        <p className={styles.cardContent}>{post.content}</p>
-        <div className={styles.cardFooter}>
+        <h1
+          className={styles.title}
+          onClick={handleClickCard}
+        >{`> ${post.title}`}</h1>
+        <p className={styles.cardContent} onClick={handleClickCard}>
+          {post.content} 
+        </p>
+        <div className={styles.cardFooter} onClick={handleClickCard}>
           <div className={styles.authorInfo}>
             <Avatar sx={{ bgcolor: red[500] }} src={post.author.picture} />
             <div className={styles.cardDetails}>
@@ -59,7 +64,14 @@ export default function CardComp({ post }) {
             </div>
           </div>
           <IconButton aria-label='share'>
-            <ShareIcon />
+            {hasComment ? (
+              <div className={styles.commentCount}>
+                <div className={styles.commentCountNum}>{commentsCount}</div>
+                <MessageIcon color='action' />
+              </div>
+            ) : (
+              <ShareIcon />
+            )}
           </IconButton>
         </div>
       </div>

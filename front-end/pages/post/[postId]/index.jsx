@@ -18,16 +18,17 @@ import Comment from '@/components/post/Comment';
 import { useContext, useEffect, useState } from 'react';
 import AuthContext from 'services/auth.service';
 import CommentForm from '@/components/post/CommentForm';
+import { useRouter } from 'next/router';
 
 export default function index({ onePost, commentList }) {
   const [comments, setComments] = useState(commentList);
   const { user } = useContext(AuthContext);
-  const handleClick = () => {
-    console.info('TODO redirect list of post from this cat');
-  };
+  const router = useRouter();
   const commentsCount = comments.length;
   const hasComment = commentsCount > 0;
-
+  const handleClickCat = (categoryId) => {
+    router.push(`/category/${categoryId}`);
+  };
   const date = DateTime.fromISO(onePost.createdAt).toLocaleString(
     DateTime.DATETIME_MED
   );
@@ -48,7 +49,7 @@ export default function index({ onePost, commentList }) {
               color: '#ffffff',
               fontWeight: 'bold',
             }}
-            onClick={handleClick}
+            onClick={()=>handleClickCat(el._id)}
           />
         ))}
       </Stack>

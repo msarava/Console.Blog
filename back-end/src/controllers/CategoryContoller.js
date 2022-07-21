@@ -1,5 +1,6 @@
 const CategoryModel = require('../models/CategoryManager');
 const jwt = require('jsonwebtoken');
+const { populate } = require('../models/CategoryManager');
 
 class CategoryController {
   static create = async (req, res) => {
@@ -21,6 +22,18 @@ class CategoryController {
     try {
       const categories = await CategoryModel.find(
         categoryId ? { _id: categoryId } : {}
+      ).populate('posts');
+      res.status(200).send(categories);
+    } catch (error) {
+      console.error(error.message);
+      res.sendStatus(500);
+    }
+  };
+  static getOne = async (req, res) => {
+    const { categoryId } = req.params;
+    try {
+      const categories = await CategoryModel.find({ _id: categoryId }).populate(
+        'posts'
       );
       res.status(200).send(categories);
     } catch (error) {
@@ -28,7 +41,6 @@ class CategoryController {
       res.sendStatus(500);
     }
   };
-
   static update = async (req, res) => {
     const { categoryId } = req.params;
     const updatedCategory = req.body;
