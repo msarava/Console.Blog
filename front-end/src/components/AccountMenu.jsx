@@ -21,7 +21,6 @@ import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 
 export default function AccountMenu() {
   const { user, setUser } = useContext(AuthContext);
-  console.log('context', user);
   const router = useRouter();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
