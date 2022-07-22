@@ -10,7 +10,7 @@ const config = {
   withCredentials: true,
 };
 //Auth
-export function registerApi(userDatas) {
+export async function registerApi(userDatas) {
   const { lastname, firstname, email, password, picture } = userDatas;
   const url = 'user/register';
   const results = Api.post(url, {
