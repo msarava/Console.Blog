@@ -23,8 +23,9 @@ import {
   TwitterShareButton,
   MailruShareButton,
 } from 'react-share';
+import Image from 'next/image';
 
-export default function index({ onePost, commentList }) {
+export default function Index({ onePost, commentList }) {
   const [comments, setComments] = useState(commentList);
   const { user } = useContext(AuthContext);
   const router = useRouter();
@@ -38,7 +39,7 @@ export default function index({ onePost, commentList }) {
   );
   return (
     <div className={styles.container}>
-      <img
+      <Image
         className={styles.postPicture}
         alt='illustration'
         src='/assets/pictures/code.jpg'
@@ -80,10 +81,10 @@ export default function index({ onePost, commentList }) {
         <LinkedinShareButton url={'http://www.google.com'}>
           <LinkedinIcon size={32} round={true} />
         </LinkedinShareButton >
-          <a href='mailto:test@pm.me' target="_blank"><EmailIcon size={32} round={true} /></a>
+          <a href='mailto:test@pm.me' target="_blank" rel="noreferrer" ><EmailIcon size={32} round={true} /></a>
       </div>
       <div className={styles.share}>
-        <h2 className={styles.titleThird}>_Laisse un com' !</h2>
+        <h2 className={styles.titleThird}>_Laisse un com&apos; !</h2>
         <p className={styles.commentCount2}>{commentsCount} commentaire(s)</p>
       </div>
       {user ? (

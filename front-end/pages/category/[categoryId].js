@@ -5,7 +5,7 @@ import CategoryCard from '@/components/post/CategoryCard';
 import { Chip } from '@mui/material';
 import { useRouter } from 'next/router';
 
-export default function categoryId({ category, allCategories }) {
+export default function CategoryId({ category, allCategories }) {
   const router=useRouter()
   const handleClickCat = (categoryId) => {
     router.push(`/category/${categoryId}`);

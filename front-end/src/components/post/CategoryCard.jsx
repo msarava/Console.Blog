@@ -3,6 +3,7 @@ import { DateTime } from 'luxon';
 import card from '@/styles/Category.module.css';
 import MessageIcon from '@mui/icons-material/Message';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 
 function CategoryCard({ post }) {
@@ -17,7 +18,7 @@ function CategoryCard({ post }) {
   }
   return (
     <div className={card.container} onClick={handleClick}>
-            <img src={post.picture} alt={post.title} height='50px'/>
+            <Image src={post.picture} alt={post.title} height='50px'/>
 <div className={card.cardTitle}>{post.title}</div>
       <div className={card.details}>
         <div className={card.date}>{date}</div>

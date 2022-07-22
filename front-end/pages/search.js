@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { getPosts } from 'services/api.services';
 import CategoryCard from '@/components/post/CategoryCard';
 
-function search({ allPosts }) {
+function Search({ allPosts }) {
   const [searchValue, setSearchValue] = useState('');
   const handleChange = (e) => {
     setSearchValue(e.target.value);
@@ -60,4 +60,4 @@ export async function getStaticProps() {
   };
 }
 
-export default search;
+export default Search;

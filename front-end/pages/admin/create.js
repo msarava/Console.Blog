@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import { Button, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import { createOnePostAPI, getCategoryAPI } from 'services/api.services';
 
-export default function create({ categories }) {
+export default function Create({ categories }) {
   const [newPost, SetNewPost] = useState({
     title: '',
     content: '',

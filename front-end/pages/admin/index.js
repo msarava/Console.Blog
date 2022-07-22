@@ -7,7 +7,7 @@ import { useContext, useEffect, useState } from 'react';
 import { getPosts } from 'services/api.services';
 import AuthContext from 'services/auth.service';
 
-export default function index({ allPosts }) {
+export default function Index({ allPosts }) {
   const [postList, setPostList] = useState(allPosts);
   return (
     <div className={styles.container}>

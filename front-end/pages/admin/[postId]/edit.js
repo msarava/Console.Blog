@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import { Button, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import { createOnePostAPI, getCategoryAPI } from 'services/api.services';
 
-function edit({ post, categories }) {
+function Edit({ post, categories }) {
   const [updatedPost, SetUpdatedPost] = useState({
     title: post.title,
     content: post.content,
@@ -135,4 +135,4 @@ export async function getServerSideProps({ params }) {
   };
 }
 
-export default edit;
+export default Edit;

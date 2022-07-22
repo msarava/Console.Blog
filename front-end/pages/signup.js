@@ -6,9 +6,8 @@ import { registerApi } from 'services/api.services';
 import { useRouter } from 'next/router';
 import { Button, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import Image from 'next/image';
-import { CleaningServices } from '@mui/icons-material';
 
-function signup() {
+function Signup() {
   const [userData, SetUserData] = useState({
     lastname: '',
     firstname: '',
@@ -112,6 +111,8 @@ function signup() {
                 height='50'
                 width='50'
                 src='/assets/pictures/profile.png'
+                alt='profile picture'
+
               />
             </MenuItem>
             <MenuItem value={'/assets/pictures/profile2.png'}>
@@ -120,6 +121,8 @@ function signup() {
                 height='50'
                 width='50'
                 src='/assets/pictures/profile2.png'
+                alt='profile picture'
+
               />
             </MenuItem>
             <MenuItem value={'/assets/pictures/profile3.png'}>
@@ -128,6 +131,8 @@ function signup() {
                 height='50'
                 width='50'
                 src='/assets/pictures/profile3.png'
+                alt='profile picture'
+
               />
             </MenuItem>
             <MenuItem value={'/assets/pictures/profile4.png'}>
@@ -136,6 +141,8 @@ function signup() {
                 height='50'
                 width='50'
                 src='/assets/pictures/profile4.png'
+                alt='profile picture'
+
               />
             </MenuItem>
             <MenuItem value={'/assets/pictures/profile5.png'}>
@@ -144,6 +151,7 @@ function signup() {
                 height='50'
                 width='50'
                 src='/assets/pictures/profile5.png'
+                alt='profile picture'
               />
             </MenuItem>
           </Select>
@@ -171,4 +179,4 @@ function signup() {
   );
 }
 
-export default signup;
+export default Signup;
