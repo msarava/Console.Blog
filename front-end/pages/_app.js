@@ -3,10 +3,8 @@ import { useContext, useState } from 'react';
 import AuthContext from 'services/auth.service';
 import '../styles/globals.css';
 import 'react-toastify/dist/ReactToastify.css';
-import '@/styles/breadcrumbs.css'
-
-
-
+import '@/styles/breadcrumbs.css';
+import RouteAuth from '@/components/admin/RouteAuth';
 
 function MyApp({ Component, pageProps }) {
   const UserContext = useContext(AuthContext);
@@ -16,7 +14,9 @@ function MyApp({ Component, pageProps }) {
   return (
     <AuthContext.Provider value={{ user, setUser }}>
       <Layout>
-        <Component {...pageProps} />
+        <RouteAuth>
+          <Component {...pageProps} />
+        </RouteAuth>
       </Layout>
     </AuthContext.Provider>
   );

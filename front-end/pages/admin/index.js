@@ -2,8 +2,10 @@ import CardAdmin from '@/components/admin/CardAdmin';
 import styles from '@/styles/PostAdmin.module.css';
 import { Button } from '@mui/material';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { useContext, useEffect, useState } from 'react';
 import { getPosts } from 'services/api.services';
+import AuthContext from 'services/auth.service';
 
 export default function index({ allPosts }) {
   const [postList, setPostList] = useState(allPosts);

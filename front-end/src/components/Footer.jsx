@@ -1,10 +1,8 @@
-import React from 'react'
-import footer from '@/styles/Footer.module.css'
+import React from 'react';
+import footer from '@/styles/Footer.module.css';
 
 function Footer() {
-  return (
-    <div className={footer.container}>© 2022</div>
-  )
+  return <div className={footer.container}>Wild Code School © 2022</div>;
 }
 
-export default Footer
+export default Footer;

@@ -1,6 +1,13 @@
-.container{
-min-height: 100vh;
-display: flex;
-flex-direction: column;
-justify-content: space-between;
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.footer {
+  text-align: center;
+}
+
+.breadcrumbs {
+  margin-top: 100px;
 }

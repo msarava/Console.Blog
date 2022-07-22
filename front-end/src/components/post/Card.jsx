@@ -52,9 +52,9 @@ export default function CardComp({ post }) {
           className={styles.title}
           onClick={handleClickCard}
         >{`> ${post.title}`}</h1>
-        <p className={styles.cardContent} onClick={handleClickCard}>
+        <div className={styles.cardContent} onClick={handleClickCard}>
          <Typography noWrap>{post.content} </Typography> 
-        </p>
+        </div>
         <div className={styles.cardFooter} onClick={handleClickCard}>
           <div className={styles.authorInfo}>
             <Avatar sx={{ bgcolor: red[500] }} src={post.author.picture} />

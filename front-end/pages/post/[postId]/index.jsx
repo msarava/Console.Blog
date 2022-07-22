@@ -9,16 +9,20 @@ import Stack from '@mui/material/Stack';
 import { DateTime } from 'luxon';
 import { Avatar, IconButton } from '@mui/material';
 import MessageIcon from '@mui/icons-material/Message';
-import TwitterIcon from '@mui/icons-material/Twitter';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import EmailIcon from '@mui/icons-material/Email';
-import RssFeedIcon from '@mui/icons-material/RssFeed';
 import SignInButton from '@/components/post/SignInButton';
 import Comment from '@/components/post/Comment';
 import { useContext, useEffect, useState } from 'react';
 import AuthContext from 'services/auth.service';
 import CommentForm from '@/components/post/CommentForm';
 import { useRouter } from 'next/router';
+import {
+  LinkedinIcon,
+  LinkedinShareButton,
+  TwitterIcon,
+  EmailIcon,
+  TwitterShareButton,
+  MailruShareButton,
+} from 'react-share';
 
 export default function index({ onePost, commentList }) {
   const [comments, setComments] = useState(commentList);
@@ -49,14 +53,14 @@ export default function index({ onePost, commentList }) {
               color: '#ffffff',
               fontWeight: 'bold',
             }}
-            onClick={()=>handleClickCat(el._id)}
+            onClick={() => handleClickCat(el._id)}
           />
         ))}
       </Stack>
       <h1 className={styles.title}>&gt; {onePost.title}</h1>
       <div className={styles.date}>{date}</div>
       <div className={styles.user}>
-        <Avatar></Avatar>
+        <Avatar src={onePost.author.picture}></Avatar>
         {onePost.author.firstname}
       </div>
       <div className={styles.comment}>
@@ -69,10 +73,14 @@ export default function index({ onePost, commentList }) {
       <h2 className={styles.titleSecond}>Envie de Réagir ?</h2>
       <div className={styles.share}>
         <h2 className={styles.titleThird}>_Partage !</h2>
-        <TwitterIcon />
-        <LinkedInIcon />
-        <EmailIcon />
-        <RssFeedIcon />
+ 
+        <TwitterShareButton url={'http://www.google.com'}>
+          <TwitterIcon size={32} round={true} />
+        </TwitterShareButton>
+        <LinkedinShareButton url={'http://www.google.com'}>
+          <LinkedinIcon size={32} round={true} />
+        </LinkedinShareButton >
+          <a href='mailto:test@pm.me' target="_blank"><EmailIcon size={32} round={true} /></a>
       </div>
       <div className={styles.share}>
         <h2 className={styles.titleThird}>_Laisse un com' !</h2>

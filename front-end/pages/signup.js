@@ -39,11 +39,10 @@ function signup() {
         }, 1500);
       })
       .catch((e) => {
-        console.log(e)
-        toast.error(e)});
+        toast.error(e.message);
+      });
   };
 
-  const helper ='<ul><li>test</li></ul>'
   return (
     <div className={form.container}>
       <h1 className={form.title}>_Inscription</h1>

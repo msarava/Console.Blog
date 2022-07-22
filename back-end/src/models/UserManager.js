@@ -5,13 +5,13 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: 'Lastname is required',
 
-    match: [/^[a-z ,.'-]+$/, 'Please fill a valid email address'],
+    match: [/^[a-zA-Z ,.'-]+$/, 'Please fill a valid email address'],
   },
   firstname: {
     type: String,
     required: 'Firstname is required',
 
-    match: [/^[a-z ,.'-]+$/, 'Please fill a valid email address'],
+    match: [/^[a-zA-Z ,.'-]+$/, 'Please fill a valid email address'],
   },
   email: {
     type: String,
@@ -26,9 +26,10 @@ const UserSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: [true, 'Please provide a password!'],
+    required: 'Please provide a password!',
+    minlength: 8,
     match: [
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/,
       'Please fill a valid password',
     ],
   },
