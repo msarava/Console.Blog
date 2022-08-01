@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from '@/styles/Comment.module.css';
 import { Avatar } from '@mui/material';
-// import { DateTime } from 'luxon';
+import { DateTime } from 'luxon';
 
 function Comment({comment}) {
   const date = DateTime.fromISO(comment.createdAt).toLocaleString(

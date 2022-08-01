@@ -43,6 +43,8 @@ export default function Index({ onePost, commentList }) {
         className={styles.postPicture}
         alt='illustration'
         src='/assets/pictures/code.jpg'
+        width='350'
+        height='250'
       />
       <Stack direction='row' spacing={1}>
         {onePost.category.map((el) => (

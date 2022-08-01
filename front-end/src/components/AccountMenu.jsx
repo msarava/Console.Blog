@@ -139,7 +139,7 @@ export default function AccountMenu() {
               <ListItemIcon>
                 <SensorOccupiedIcon fontSize='small' />
               </ListItemIcon>
-              <Link href='/signup'>_S&pos;inscrire</Link>
+              <Link href='/signup'>_S&apos;inscrire</Link>
             </>
           )}
         </MenuItem>

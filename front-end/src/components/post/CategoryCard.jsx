@@ -17,7 +17,7 @@ function CategoryCard({ post }) {
   };
   return (
     <div className={card.container} onClick={handleClick}>
-      <Image src={post.picture} alt={post.title} height='50px' />
+      <Image src={post.picture} alt={post.title} width='100px' height='50px' />
       <div className={card.cardTitle}>{post.title}</div>
       <div className={card.details}>
         <div className={card.date}>{date}</div>
