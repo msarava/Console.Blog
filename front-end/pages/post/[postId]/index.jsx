@@ -15,14 +15,14 @@ import { useContext, useEffect, useState } from 'react';
 import AuthContext from 'services/auth.service';
 import CommentForm from '@/components/post/CommentForm';
 import { useRouter } from 'next/router';
-import {
-  LinkedinIcon,
-  LinkedinShareButton,
-  TwitterIcon,
-  EmailIcon,
-  TwitterShareButton,
-  MailruShareButton,
-} from 'react-share';
+// import {
+//   LinkedinIcon,
+//   LinkedinShareButton,
+//   TwitterIcon,
+//   EmailIcon,
+//   TwitterShareButton,
+//   MailruShareButton,
+// } from 'react-share';
 import Image from 'next/image';
 
 export default function Index({ onePost, commentList }) {
@@ -74,14 +74,15 @@ export default function Index({ onePost, commentList }) {
       <h2 className={styles.titleSecond}>Envie de Réagir ?</h2>
       <div className={styles.share}>
         <h2 className={styles.titleThird}>_Partage !</h2>
- 
-        <TwitterShareButton url={'http://www.google.com'}>
+        {/* <TwitterShareButton url={'http://www.google.com'}>
           <TwitterIcon size={32} round={true} />
         </TwitterShareButton>
         <LinkedinShareButton url={'http://www.google.com'}>
           <LinkedinIcon size={32} round={true} />
-        </LinkedinShareButton >
-          <a href='mailto:test@pm.me' target="_blank" rel="noreferrer" ><EmailIcon size={32} round={true} /></a>
+        </LinkedinShareButton>
+        <a href='mailto:test@pm.me' target='_blank' rel='noreferrer'>
+          <EmailIcon size={32} round={true} />
+        </a> */}
       </div>
       <div className={styles.share}>
         <h2 className={styles.titleThird}>_Laisse un com&apos; !</h2>

@@ -7,7 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import { red } from '@mui/material/colors';
 import ShareIcon from '@mui/icons-material/Share';
 import { useRouter } from 'next/router';
-import { DateTime } from 'luxon';
+// import { DateTime } from 'luxon';
 import { Chip, Stack, Typography } from '@mui/material';
 import styles from '@/styles/Post.module.css';
 
@@ -53,7 +53,7 @@ export default function CardComp({ post }) {
           onClick={handleClickCard}
         >{`> ${post.title}`}</h1>
         <div className={styles.cardContent} onClick={handleClickCard}>
-         <Typography noWrap>{post.content} </Typography> 
+          <Typography noWrap>{post.content} </Typography>
         </div>
         <div className={styles.cardFooter} onClick={handleClickCard}>
           <div className={styles.authorInfo}>

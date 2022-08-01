@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 const app = require('./src/app');
 
-const port = parseInt(process.env.APP_PORT ?? '5000', 10);
+const port = parseInt(process.env.PORT ?? '5000', 10);
 
 const { DB_URL } = process.env;
 

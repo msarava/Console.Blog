@@ -6,6 +6,7 @@ const Api = axios.create({
 const config = {
   headers: {
     'Content-Type': 'application/json',
+    Accept: 'application/json',
   },
   withCredentials: true,
 };
