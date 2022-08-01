@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const CommentSchema = new mongoose.Schema({
   content: {
-    type: ,
+    type: String,
     required: [true, 'Please provide a content text!'],
     match: [/[a-zA-Z0-9@=\-'"]+/, 'Please provide correct expression'],
   },
